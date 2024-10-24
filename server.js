@@ -12,34 +12,34 @@ server.register(cors, {
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 })
 
-// ENDPOINTS (CRUD):
+// ENDPOINTS (CRUD USUARIO):
 
 // CREATE
-server.post('/users', async (request, reply) => {
+server.post('/usuarios', async (request, reply) => {
     const body = request.body;
-    await databasePostgres.createUser(body);
+    await databasePostgres.createUsarios(body);
     return reply.status(201).send();
 })
 
-// READE
-server.get('/users', async () => {
-    const users = await databasePostgres.listUsers();
-    return users;
+// READ
+server.get('/usuarios', async () => {
+    const Usuarios = await databasePostgres.listUsuarios();
+    return Usuarios;
 });
 
 // UPDATE
-server.put('/users/:id', async (request, reply) => {
-    const userID = request.params.id;
+server.put('/usuarios/:id', async (request, reply) => {
+    const usuarioID = request.params.id;
     const body = request.body;
-    await databasePostgres.updateUser(userID, body);
+    await databasePostgres.updateUsuarios(usuarioID, body);
 
     return reply.status(204).send();
 })
 
 // DELETE
-server.delete('/users/:id', async (request, reply) => {
-    const userID = request.params.id;
-    await databasePostgres.deleteUser(userID);
+server.delete('/usuarios/:id', async (request, reply) => {
+    const usuarioID = request.params.id;
+    await databasePostgres.deleteUsuarios(usuarioID);
 
     return reply.status(204).send();
 })
