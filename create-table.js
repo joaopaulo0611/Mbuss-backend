@@ -12,17 +12,17 @@ sql`
   );
 
   CREATE TABLE Produtos(
-      id_produto SERIAL PRIMARY KEY,
+      id_produto text PRIMARY KEY,
       nome character varying(255),
       tamanho character varying(5),
-      valor INT,
+      valor FLOAT,
       quantidade int,
       descricao character varying(255)
   );
 
   CREATE TABLE Vendas(
-      id_venda SERIAL PRIMARY KEY,
-      id_usuario SERIAL,
+      id_venda text PRIMARY KEY,
+      id_usuario text,
       FOREIGN KEY (id_usuario) REFERENCES Usuarios (id_usuario),
       status_venda BOOLEAN,
       metodo_pagamento character varying(255),
@@ -30,10 +30,10 @@ sql`
   );
 
   CREATE TABLE VendasProduto(
-      id_vendasProduto SERIAL PRIMARY KEY,
-      id_produto SERIAL,
+      id_vendasProduto text PRIMARY KEY,
+      id_produto text,
       FOREIGN KEY (id_produto) REFERENCES Produtos (id_produto),
-      id_venda SERIAL,
+      id_venda text,
       FOREIGN KEY (id_venda) REFERENCES Vendas (id_venda)
   );
 `.then(() => {

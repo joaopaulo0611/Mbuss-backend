@@ -1,6 +1,7 @@
 #PARA UTILIZAR ESSES ENDPOINTS É NECESSÁRIO INSTALAR A EXTENSÃO DO VSCODE "REST CLIENT"
 ###
 
+//USUARIO
 GET http://localhost:3333/usuarios
 
 ###
@@ -34,3 +35,39 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:3333/usuarios/7464b07f-f254-4960-bcf9-3e81bd3a9b6a
+
+
+
+//PRODUTO
+###
+
+GET http://localhost:3333/produtos
+###
+
+POST http://localhost:3333/produtos
+Content-Type: application/json
+
+{
+    "nome": "Camiseta",
+    "tamanho": "G",
+    "valor": "189",
+    "quantidade": "50",
+    "descricao": "Camiseta"
+}
+
+###
+
+PUT http://localhost:3333/produtos/5f411b7c-70ae-4a67-856a-d3e1ea34b1d8
+Content-Type: application/json
+
+{
+    "nome": "Camiseta",
+    "tamanho": "G",
+    "valor": "189",
+    "quantidade": "55",
+    "descricao": "Camiseta"
+}
+
+###
+
+DELETE http://localhost:3333/produtos/5f411b7c-70ae-4a67-856a-d3e1ea34b1d8

@@ -50,23 +50,24 @@ export class DatabasePostgres {
     return produtos;
   }
 
-  async createProduto(produto) {
+  async createProdutos(produto) {
     const id_produto = randomUUID();
+    console.log(id_produto);
     const nome = produto.nome;
     const tamanho = produto.tamanho;
     const valor = produto.valor;
-    const quantidade = produto.dquantidade;
+    const quantidade = produto.quantidade;
     const descricao = produto.descricao;
     
-    await sql`insert into Produto (id_produto, tamanho, valor, quantidade, descricao)
+    await sql`insert into Produtos (id_produto,nome, tamanho, valor, quantidade, descricao)
     values (${id_produto}, ${nome}, ${tamanho}, ${valor}, ${quantidade}, ${descricao})`
   }
 
-  async updateProduto(id_produto, produto) {
+  async updateProdutos(id_produto, produto) {
     const nome = produto.nome
     const tamanho = produto.tamanho;
     const valor = produto.valor;
-    const quantidade = produto.dquantidade;
+    const quantidade = produto.quantidade;
     const descricao = produto.descricao;
 
     await sql`update Produtos set 
@@ -79,7 +80,7 @@ export class DatabasePostgres {
     `;
   }
 
-  async deleteProduto(id_produto) {
+  async deleteProdutos(id_produto) {
     await sql`delete from Produtos where id_produto = ${id_produto}`
   }
 

@@ -13,7 +13,6 @@ server.register(cors, {
 })
 
 // ENDPOINTS (CRUD USUARIO):
-
 // CREATE
 server.post('/usuarios', async (request, reply) => {
     const body = request.body;
@@ -40,6 +39,43 @@ server.put('/usuarios/:id', async (request, reply) => {
 server.delete('/usuarios/:id', async (request, reply) => {
     const usuarioID = request.params.id;
     await databasePostgres.deleteUsuarios(usuarioID);
+
+    return reply.status(204).send();
+})
+
+
+server.listen({
+    port: 3333
+});
+
+
+// ENDPOINTS (CRUD PRODUTO):
+// CREATE
+server.post('/produtos', async (request, reply) => {
+    const body = request.body;
+    await databasePostgres.createProdutos(body);
+    return reply.status(201).send();
+})
+
+// READ
+server.get('/produtos', async () => {
+    const Produtos = await databasePostgres.listProdutos();
+    return Produtos;
+});
+
+// UPDATE
+server.put('/produtos/:id', async (request, reply) => {
+    const produtoID = request.params.id;
+    const body = request.body;
+    await databasePostgres.updateProdutos(produtoID, body);
+
+    return reply.status(204).send();
+})
+
+// DELETE
+server.delete('/produtos/:id', async (request, reply) => {
+    const produtoID = request.params.id;
+    await databasePostgres.deleteProdutos(produtoID);
 
     return reply.status(204).send();
 })
