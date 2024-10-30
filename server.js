@@ -18,7 +18,7 @@ server.register(cors, {
 // CREATE
 server.post('/usuarios', async (request, reply) => {
     const body = request.body;
-    await databasePostgres.createUsarios(body);
+    await databasePostgres.createUsuarios(body);
     return reply.status(201).send();
 })
 

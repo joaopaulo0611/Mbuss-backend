@@ -20,14 +20,14 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3333/usuarios/f15beabf-842f-4a20-b866-5350bfda6d6b
+PUT http://localhost:3333/usuarios/a727fc99-646f-455b-8fa3-1927213b9c74
 Content-Type: application/json
 
 {
     "nome": "ORELHA",
     "email": "12345",
     "senha": "BORGES",
-    "cpf": "11122233344",
+    "cpf": "11122233334",
     "telefone": "1234567900",
     "endereco": "asdasd"
 }
