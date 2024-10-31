@@ -18,10 +18,9 @@ export class DatabasePostgres {
     const senhaHasheada = await bcrypt.hash(usuario.senha, 10); // Hashing da senha
     const cpf = usuario.cpf;
     const telefone = usuario.telefone;
-    const endereco = usuario.endereco;
 
-    await sql`insert into Usuarios (id_usuario, nome, email, senha, cpf, telefone, endereco)
-    values (${id}, ${nome}, ${email}, ${senhaHasheada}, ${cpf}, ${telefone}, ${endereco})`;
+    await sql`insert into Usuarios (id_usuario, nome, email, senha, cpf, telefone)
+    values (${id}, ${nome}, ${email}, ${senhaHasheada}, ${cpf}, ${telefone})`;
   }
 
   async findUsuarioByEmail(email) {
@@ -35,15 +34,13 @@ export class DatabasePostgres {
     const senha = usuario.senha;
     const cpf = usuario.cpf;
     const telefone = usuario.telefone;
-    const endereco = usuario.endereco;
 
     await sql`update Usuarios set 
         nome = ${nome},
         email = ${email},
         senha = ${senha},
         cpf = ${cpf},
-        telefone = ${telefone},
-        endereco = ${endereco}
+        telefone = ${telefone}
         where id_usuario = ${id}
     `;
   }

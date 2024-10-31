@@ -7,8 +7,7 @@ sql`
       email character varying(255),
       senha character varying(255),
       cpf character varying(15),
-      telefone character varying(255),
-      endereco character varying(255)
+      telefone character varying(255)
   );
 
   CREATE TABLE Produtos(
