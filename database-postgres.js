@@ -1,9 +1,12 @@
 import { randomUUID } from "crypto";
 import { sql } from './db.js';
-import bcrypt from 'bcrypt';
 
 // USUARIO E PRODUTOS
 export class DatabasePostgres { 
+  async verificarSeTemUsuarioCadastrado(credentials) {
+    const usuario = await sql`select * from Usuarios where email = ${credentials.email} and senha = ${credentials.senha}`;
+    return usuario;
+  }
 
   // Usuários
   async listUsuarios() {
@@ -15,17 +18,12 @@ export class DatabasePostgres {
     const id = randomUUID();
     const nome = usuario.nome;
     const email = usuario.email;
-    const senhaHasheada = await bcrypt.hash(usuario.senha, 10); // Hashing da senha
+    const senhaHasheada = usuario.senha;
     const cpf = usuario.cpf;
     const telefone = usuario.telefone;
 
     await sql`insert into Usuarios (id_usuario, nome, email, senha, cpf, telefone)
     values (${id}, ${nome}, ${email}, ${senhaHasheada}, ${cpf}, ${telefone})`;
-  }
-
-  async findUsuarioByEmail(email) {
-    const usuario = await sql`select * from Usuarios where email = ${email}`;
-    return usuario;
   }
 
   async updateUsuarios(id, usuario) {

@@ -124,36 +124,18 @@ server.delete('/produtos/:id', async (request, reply) => {
 
 // LOGIN
 server.post('/login', async (request, reply) => {
-    const { email, senha } = request.body;
-    try {
-        // Verificar se o usuário existe
-        const usuarios = await databasePostgres.findUsuarioByEmail(email);
-        const usuario = usuarios[0]; // Assumindo que findUsuarioByEmail retorna uma lista
-
-        if (!usuario) {
-            console.warn('Usuário não encontrado:', email);
-            return reply.status(404).send({ message: 'Usuário não encontrado' });
-        }
-
-        // Comparar a senha fornecida com a senha do banco
-        const senhaValida = await bcrypt.compare(senha, usuario.senha);
-        if (!senhaValida) {
-            console.warn('Senha incorreta para o usuário:', email);
-            return reply.status(401).send({ message: 'Credenciais inválidas' });
-        }
-
-        // Gerar um token JWT
-        const token = jwt.sign({ id: usuario.id_usuario, email: usuario.email }, JWT_SECRET, {
-            expiresIn: '1h',
-        });
-        console.log('Login bem-sucedido para o usuário:', email);
-
-        return reply.send({ token });
-    } catch (error) {
-        console.error('Erro ao realizar login:', error);
-        return reply.status(500).send({ message: 'Erro interno ao realizar login' });
+    const credentials = request.body;
+    const user = await databasePostgres.verificarSeTemUsuarioCadastrado(credentials);
+    
+    if (user) {
+        console.log("Login success");
+        return reply.status(200).send({ success: true, user }); // Retorne os dados do usuário
+    } else {
+        console.log("Login failed");
+        return reply.status(400).send({ success: false });
     }
 });
+
 
 // Iniciar o servidor
 server.listen({ port: 3333 }, (err, address) => {
