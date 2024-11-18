@@ -1,8 +1,25 @@
 import { fastify } from 'fastify';
 import cors from '@fastify/cors';
 import { DatabasePostgres } from './database-postgres.js';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+
+const fastify = require('fastify')({ logger: true });
+const path = require('path');
+const multer = require('fastify-multipart');
+
+// Middleware para uploads de arquivos
+fastify.register(multer.contentParser);
+
+// Configuração do diretório para armazenar imagens
+const UPLOAD_DIR = path.join(__dirname, 'uploads');
+const fs = require('fs');
+if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR);
+
+fastify.register(require('fastify-static'), {
+  root: UPLOAD_DIR,
+  prefix: '/uploads/',
+});
+
+
 
 const server = fastify();
 const databasePostgres = new DatabasePostgres();
@@ -145,3 +162,43 @@ server.listen({ port: 3333 }, (err, address) => {
     }
     console.log(`Servidor rodando em ${address}`);
 });
+
+fastify.post('/produtos', async (request, reply) => {
+    const { nome, tamanho, valor, quantidade, descricao } = request.body;
+  
+    // Processar imagem
+    const files = request.raw.files;
+    if (!files || !files.imagem) {
+      return reply.status(400).send({ error: 'Imagem é obrigatória.' });
+    }
+  
+    const file = files.imagem;
+    const filePath = path.join(UPLOAD_DIR, file.filename);
+    await file.toFile(filePath);
+  
+    // Inserir no banco de dados
+    const client = await fastify.pg.connect();
+    try {
+      const query = `
+        INSERT INTO produtos (nome, tamanho, valor, quantidade, descricao, imagem)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING id_produto;
+      `;
+      const values = [nome, tamanho, valor, quantidade, descricao, `/uploads/${file.filename}`];
+      const result = await client.query(query, values);
+      reply.status(201).send({ id_produto: result.rows[0].id_produto });
+    } catch (error) {
+      reply.status(500).send(error);
+    } finally {
+      client.release();
+    }
+  });
+  
+  // Iniciar o servidor
+  fastify.listen(3000, (err) => {
+    if (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
+    fastify.log.info('Servidor rodando em http://localhost:3000');
+  });
