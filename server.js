@@ -67,20 +67,6 @@ server.delete('/usuarios/:id', async (request, reply) => {
     }
 });
 
-// LOGIN
-server.post('/login', async (request, reply) => {
-    const credentials = request.body;
-    const user = await databasePostgres.verificarSeTemUsuarioCadastrado(credentials);
-    
-    if (user.length > 0) {
-        console.log("Login success");
-        return reply.status(200).send({ success: true, user }); // Retorne os dados do usuário
-    } else {
-        console.log("Login failed");
-        return reply.status(200).send({ success: false });
-    }
-});
-
 //CRUD PRODUTOS
 // CREATE
 server.post('/produtos', async (request, reply) => {
