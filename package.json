@@ -15,7 +15,9 @@
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "fastify": "^4.28.1",
+    "fastify-multipart": "^5.4.0",
     "jsonwebtoken": "^9.0.2",
+    "path": "^0.12.7",
     "postgres": "^3.4.4"
   },
   "description": ""

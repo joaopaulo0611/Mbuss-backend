@@ -1,8 +1,8 @@
 import { fastify } from 'fastify';
 import cors from '@fastify/cors';
 import { DatabasePostgres } from './database-postgres.js';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+
+
 
 const server = fastify();
 const databasePostgres = new DatabasePostgres();
@@ -13,8 +13,6 @@ server.register(cors, {
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 });
 
-// Constantes de configuração
-const JWT_SECRET = 'senhaJWT'; // Defina uma chave secreta forte
 
 // CRUD USUARIO
 // CREATE
@@ -127,12 +125,12 @@ server.post('/login', async (request, reply) => {
     const credentials = request.body;
     const user = await databasePostgres.verificarSeTemUsuarioCadastrado(credentials);
     
-    if (user) {
+    if (user.length > 0) {
         console.log("Login success");
         return reply.status(200).send({ success: true, user }); // Retorne os dados do usuário
     } else {
         console.log("Login failed");
-        return reply.status(400).send({ success: false });
+        return reply.status(200).send({ success: false });
     }
 });
 
