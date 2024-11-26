@@ -120,5 +120,4 @@ async deleteCarrinho(id) {
   await sql`DELETE FROM Carrinho WHERE id = ${id}`;
 }
 
-// Funcao Favoritos
 }
