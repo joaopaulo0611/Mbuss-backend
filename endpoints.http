@@ -83,5 +83,9 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:3333/produtosCatalogo/1
+Content-Type: application/json
 
-DELETE http://localhost:3333/produtos/5f411b7c-70ae-4a67-856a-d3e1ea34b1d8
+###
+
+DELETE http://localhost:3333/produtos/1

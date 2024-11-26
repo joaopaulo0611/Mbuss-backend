@@ -16,57 +16,42 @@ INSERT INTO Produtos
 (id_produto, nome, tamanho, valor, quantidade, descricao, imagem)
 VALUES 
 (1, 
- 'URBAN NIGHTLIFE Black Tee', 
+ 'SHOP KART Black Tee', 
  'M', 
  189, 
  10,
- 'URBAN NIGHTLIFE Black Tee é uma camiseta confeccionada com gola em ribana de 3cm,
+ 'SHOP KART Black Tee é uma camiseta confeccionada com gola em ribana de 3cm,
  tem mangas e modelagem mais ampla com foco em um caimento perfeito ao corpo. O material
  escolhido é um algodão de gramatura elevada que proporciona conforto e veste de forma fluída.', 
- 'http://localhost:5173/src/images/CamisetaJapan.png');
+ 'http://localhost:5173/src/images/CamisetaCarrinho.png');
 
 
 INSERT INTO Produtos 
 (id_produto, nome, tamanho, valor, quantidade, descricao, imagem)
 VALUES 
 (2, 
- 'SCREAM MBUSS Black Tee', 
+ 'BASEBALL BAT Black Tee', 
  'M', 
  189, 
  10,
- 'SCREAM MBUSS Black Tee é uma camiseta confeccionada com gola em ribana de 3cm,
+ 'BASEBALL BAT Black Tee é uma camiseta confeccionada com gola em ribana de 3cm,
  tem mangas e modelagem mais ampla com foco em um caimento perfeito ao corpo. O material
  escolhido é um algodão de gramatura elevada que proporciona conforto e veste de forma fluída.', 
- 'http://localhost:5173/src/images/CamisetaGrito.png');
+ 'http://localhost:5173/src/images/CamisetaTaco.png');
 
 
 INSERT INTO Produtos 
 (id_produto, nome, tamanho, valor, quantidade, descricao, imagem)
 VALUES 
 (3, 
- 'FINISH LINE Black Tee', 
+ 'PUNCH Black Tee', 
  'M', 
  189, 
  10,
- 'FINISH LINE Black Tee é uma camiseta confeccionada com gola em ribana de 3cm,
+ 'PUNCH Black Tee é uma camiseta confeccionada com gola em ribana de 3cm,
  tem mangas e modelagem mais ampla com foco em um caimento perfeito ao corpo. O material
  escolhido é um algodão de gramatura elevada que proporciona conforto e veste de forma fluída.', 
- 'http://localhost:5173/src/images/camisetaVermelha.png');
-
-
-INSERT INTO Produtos 
-(id_produto, nome, tamanho, valor, quantidade, descricao, imagem)
-VALUES 
-(4, 
- 'TOKYO DRIFT Black Tee', 
- 'M', 
- 189, 
- 10,
- 'TOKYO DRIFT Black Tee é uma camiseta confeccionada com gola em ribana de 3cm,
- tem mangas e modelagem mais ampla com foco em um caimento perfeito ao corpo. O material
- escolhido é um algodão de gramatura elevada que proporciona conforto e veste de forma fluída.', 
- 'http://localhost:5173/src/images/CamisetaDRIFT.png');
-
+ 'http://localhost:5173/src/images/CamisetaLuta.png');
 `.then(() => {
   console.log('tabela criada');
 })

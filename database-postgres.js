@@ -83,6 +83,16 @@ async deleteProduto(id) {
   await sql`DELETE FROM Produtos WHERE id_produto = ${id}`;
 }
 
+//
+async listProdutoById(id) {
+  return await sql`
+    SELECT nome, valor, descricao, imagem
+    FROM Produtos
+    WHERE id_produto = ${id}
+  `;
+}
+
+
 //Funcao Carrinho
 
 async listCarrinho() {

@@ -29,3 +29,6 @@ Para rodar o projeto, siga os passos abaixo:
 
 5. **Testar Endpoints**
    - Os endpoints podem ser testados através do arquivo `endpoints.http` instalando a extensão do vscode `rest client`.
+
+
+http://localhost:5173/src/images/CamisetaCasa.png

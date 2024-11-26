@@ -135,6 +135,23 @@ server.post('/login', async (request, reply) => {
 });
 
 
+//Visualização Produtos
+server.get('/produtosCatalogo/:id', async (request, reply) => {
+    const { id } = request.params;  // Obtemos o ID da URL
+    try {
+      // Chama a função para buscar o produto específico
+      const produto = await databasePostgres.listProdutoById(id);
+      if (!produto) {
+        return reply.status(404).send({ message: 'Produto não encontrado.' });
+      }
+      return produto;
+    } catch (error) {
+      console.error('Erro ao buscar produto:', error);
+      return reply.status(500).send({ message: 'Erro ao carregar detalhes do produto.' });
+    }
+  });
+
+
 // Iniciar o servidor
 server.listen({ port: 3333 }, (err, address) => {
     if (err) {
