@@ -11,6 +11,14 @@ sql`
   imagem text
 );
 
+CREATE TABLE Usuarios (
+  id_usuario text PRIMARY KEY,
+  nome character varying(255),
+  email character varying(255),
+  senha character varying(255),
+  cpf character varying(15),
+  telefone character varying(255)
+);
 
 INSERT INTO Produtos 
 (id_produto, nome, tamanho, valor, quantidade, descricao, imagem)
